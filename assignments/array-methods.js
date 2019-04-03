@@ -56,28 +56,46 @@ const runners = [{"id":1,"first_name":"Charmain","last_name":"Seiler","email":"c
 // ==== Challenge 1: Use .forEach() ====
 // The event director needs both the first and last names of each runner for their running bibs.  Combine both the first and last names into a new array called fullName. 
 let fullName = [];
-console.log(fullName);
+for(let i = 0; i < runners.length; i++) {
+    let newObj = {};
+    newObj.firstName = runners[i].first_name;
+    newObj.lastName = runners[i].last_name;
+    fullName.push(newObj)
+    newObj = {};
+}
+//console.log(fullName);
 
 // ==== Challenge 2: Use .map() ====
 // The event director needs to have all the runner's first names converted to uppercase because the director BECAME DRUNK WITH POWER. Convert each first name into all caps and log the result
-let allCaps = [];
-console.log(allCaps); 
+const allCaps = runners.map((first_name) => {return {'first_name': first_name.first_name}})
+console.log(allCaps) 
 
 // ==== Challenge 3: Use .filter() ====
 // The large shirts won't be available for the event due to an ordering issue.  Get a list of runners with large sized shirts so they can choose a different size. Return an array named largeShirts that contains information about the runners that have a shirt size of L and log the result
-let largeShirts = [];
+let largeShirts = runners.filter((shirt_size) => {return shirt_size.shirt_size == "L"})
 console.log(largeShirts);
 
 // ==== Challenge 4: Use .reduce() ====
 // The donations need to be tallied up and reported for tax purposes. Add up all the donations into a ticketPriceTotal array and log the result
-let ticketPriceTotal = [];
+let ticketPriceTotal = runners.reduce((total, donation) => {return total += donation.donation}, 0);
 console.log(ticketPriceTotal);
 
 // ==== Challenge 5: Be Creative ====
 // Now that you have used .forEach(), .map(), .filter(), and .reduce().  I want you to think of potential problems you could solve given the data set and the 5k fun run theme.  Try to create and then solve 3 unique problems using one or many of the array methods listed above.
 
 // Problem 1
-
+//The coaches are crafting new jerseys for the runners, we need you to list all last names for that purpose.
+const lastName = runners.map((last_name) => {return {'last_name': last_name.last_name}})
+console.log(lastName)
 // Problem 2
-
+//The manufacturer is charging extra for any size above a large, let us know who they are.
+let aboveLarge = runners.filter((shirt_size) => {
+    if(shirt_size.shirt_size === "3XL" || shirt_size.shirt_size === "2XL" || shirt_size.shirt_size === "XL"){
+        return shirt_size.shirt_size; 
+    }   
+})
+console.log(aboveLarge);
 // Problem 3
+//I need an emailing list for my golf club
+const dadsEmailList = runners.map((email) => {return {'email': email.email}})
+console.log(dadsEmailList) 
